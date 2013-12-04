@@ -15,11 +15,16 @@ gem 'pg'
 group :assets do
   gem 'sass-rails'
   gem 'coffee-rails'
+  gem 'bootstrap-sass'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :platforms => :ruby
 
   gem 'uglifier', '>= 1.0.3'
+end
+
+group :development do
+  gem 'awesome_print'
 end
 
 

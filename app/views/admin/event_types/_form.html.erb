@@ -1,0 +1,57 @@
+<%= form_for([:admin, current_workspace, @event_type]) do |f| %>
+  <% if @event_type.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@event_type.errors.count, "error") %> prohibited this event_type from being saved:</h2>
+
+      <ul>
+      <% @event_type.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_field :description %>
+  </div>
+
+  <div>Create new participants</div>
+  <table>
+  	<thead>
+  		<tr>
+		  <th>First Name</th>
+		  <th>Middle Name</th>
+		  <th>Last Name</th>
+		  <th>Email</th>
+                </tr>
+  	</thead>
+	<tbody>
+	  <% for @person in @people %>
+	    <%= fields_for "person[]" do |f| %>
+	      <tr>
+	      	<td><%= f.text_field :first_name %></td>
+	      	<td><%= f.text_field :middle_name %></td>
+	      	<td><%= f.text_field :last_name %></td>
+	      	<td><%= f.email_field :email %></td>
+	      </tr>
+	    <% end %>
+	  <% end %>
+	</tbody>
+  </table>
+
+  <div>Add participants from existing people</div>
+  <% Person.non_enrollees_for_event_type(@event_type).each do |person| %>
+    <span><%= person.name %></span>  
+    <input type="checkbox" name="participant_ids[]" value="<%= person.id %>"/>
+    <br/>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

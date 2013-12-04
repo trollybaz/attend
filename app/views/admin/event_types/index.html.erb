@@ -1,0 +1,34 @@
+<h1>Listing Event Types</h1>
+
+<% if alert %>
+<p id="alert"><%= alert %></p>
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @event_types.each do |event_type| %>
+      <tr>
+        <td><%= event_type.name %></td>
+        <td><%= event_type.description %></td>
+        <td><%= link_to 'Show', admin_workspace_event_type_path(current_workspace, event_type) %></td>
+        <td><%= link_to 'Edit', edit_admin_workspace_event_type_path(current_workspace, event_type) %></td>
+        <td><%= link_to 'Destroy', admin_workspace_event_type_path(current_workspace, event_type), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Event Type', new_admin_workspace_event_type_path(current_workspace) %>
+

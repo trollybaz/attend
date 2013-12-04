@@ -1,0 +1,23 @@
+<h1>Groups</h1>
+
+<table>
+	<thead>
+		<tr>
+			<th>Name:</th>
+			<th></th>
+			<th></th>
+			<th></th>
+                </tr>
+	</thead>
+
+  <tbody>
+    <% @workspaces.each do |workspace| %>
+      <tr>
+        <td><%= workspace.name %></td>
+        <td><%= link_to 'Show', admin_workspace_path(workspace) %></td>
+        <td><%= link_to 'Edit', edit_admin_workspace_path(workspace) %></td>
+        <td><%= link_to 'Destroy', admin_workspace_path(workspace), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

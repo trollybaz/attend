@@ -1,0 +1,12 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @workspace.name %>
+</p>
+
+<%= link_to 'Event Types', admin_workspace_event_types_path(@workspace) %> |
+<%= link_to 'People', admin_workspace_people_path(@workspace) %> |
+
+<%= link_to 'Edit', edit_admin_workspace_path(@workspace) %> |
+<%= link_to 'Back', admin_workspaces_path %>

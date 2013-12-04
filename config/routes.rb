@@ -1,4 +1,18 @@
 Attend::Application.routes.draw do
+  authenticate :user do
+    # TODO: enforce particular users for admin access
+    namespace :admin do
+      resources :workspaces do
+        resources :people
+        resources :event_types do
+          resources :events
+        end
+      end
+      root to: 'home#index'
+    end
+  end
+  
+
   devise_for :users
   # The priority is based upon order of creation:
   # first created -> highest priority.
