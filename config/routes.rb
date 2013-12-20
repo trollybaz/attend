@@ -13,7 +13,22 @@ Attend::Application.routes.draw do
   end
   
 
-  devise_for :users
+  devise_for :users, controllers: {
+    registrations:      'users/registrations' # custom build_resource for new users
+  }
+
+  devise_scope :user do
+    # TODO: Better routes?
+    match '/users/:id/complete_invitation/:invitation_token',
+      :to => 'users/registrations#complete_invitation', :via => :get,
+      :as => :complete_invitation
+
+    match '/users/:id/complete_invitation_update',
+      :to => 'users/registrations#complete_invitation_update', :via => :put,
+      :as => :complete_invitation_update
+  end
+
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
