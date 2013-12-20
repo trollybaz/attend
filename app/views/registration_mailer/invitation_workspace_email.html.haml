@@ -1,0 +1,7 @@
+%div.invitation_body
+  You have been invited to join Workspace:
+  %span.name= @workspace.name
+  by
+  %span.name= @inviter_user.email
+
+  %a= @invitee_user.invitation_link
