@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails', '4.0.0'
+
 gem 'devise'
 
 # Bundle edge Rails instead:
@@ -9,6 +10,9 @@ gem 'devise'
 # gem 'sqlite3'
 gem 'pg'
 
+gem 'therubyracer'
+
+gem 'haml'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -24,9 +28,10 @@ group :assets do
 end
 
 group :development do
-  gem 'awesome_print'
+  # gem 'jazz_hands'
+  gem 'byebug'
+  gem 'letter_opener'
 end
-
 
 
 gem 'jquery-rails'

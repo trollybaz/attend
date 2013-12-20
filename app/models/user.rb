@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  include Invitations
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -9,9 +10,23 @@ class User < ActiveRecord::Base
 
   validate :has_workspace?, on: :create
 
-
-
   ### Utility methods ###
+
+#  def name=(name)
+#    parts = name.split(/\s+/).reject{|s|s.blank?}
+#
+#    if parts.length > 0
+#      self.first_name = parts[0]
+#    end
+# 
+#    if parts.length > 1   
+#      self.last_name = parts[1..parts.length-1].join(' ')
+#    end
+#  end
+#
+#  def name
+#    "#{first_name} #{last_name}"
+#  end
   
   def setup_workspace_for_new_user!
     workspace = workspaces.build
@@ -22,7 +37,8 @@ class User < ActiveRecord::Base
  private
 
   def has_workspace?
-    if memberships.count <= 0
+    # TODO: Not ideal, but should only be called on user creation
+    if !workspaces.any?
       errors.add(:memberships, 'count needs to be > 0')
     end 
   end
