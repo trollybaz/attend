@@ -1,13 +1,14 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.0.0'
+gem 'rails', '4.0.2'
 
 gem 'devise'
+gem 'active_model_serializers', :git => 'git://github.com/rails-api/active_model_serializers.git'
+gem 'pundit'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-# gem 'sqlite3'
 gem 'pg'
 
 gem 'therubyracer'
@@ -28,8 +29,7 @@ group :assets do
 end
 
 group :development do
-  # gem 'jazz_hands'
-  gem 'byebug'
+  gem 'pry-byebug'
   gem 'letter_opener'
 end
 

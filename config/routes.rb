@@ -10,7 +10,22 @@ Attend::Application.routes.draw do
       end
       root to: 'home#index'
     end
+
+    # API
+    namespace :api do
+      resources :workspaces do
+        resources :people
+        resources :event_types do
+          resources :events
+        end
+      end
+    end
   end
+
+  ### Sample routes
+  # /admin/workspaces # admin
+  # /api/workspaces   # api
+  # /workspaces/1     # web
   
 
   devise_for :users, controllers: {
