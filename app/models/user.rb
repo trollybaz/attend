@@ -28,10 +28,10 @@ class User < ActiveRecord::Base
 #    "#{first_name} #{last_name}"
 #  end
   
-  def setup_workspace_for_new_user!
+  def build_workspace_for_user(name = "#{email}'s Attendance")
     workspace = workspaces.build
-    workspace.name = email + "'s Attendance"
-    self.save!
+    workspace.name = name
+    workspace
   end
 
  private

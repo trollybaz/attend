@@ -5,6 +5,5 @@ module Workspaces
 
     # for testing
     # has_many   :memberships,   serializer: Memberships::StandardSerializer
-
   end
 end

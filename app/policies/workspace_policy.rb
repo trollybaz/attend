@@ -3,7 +3,7 @@ class WorkspacePolicy
 
   self::Scope = Struct.new(:user, :scope) do
     def resolve
-      scope.for_user(user).order(:name)
+      scope.for_user(user)
     end
   end
 

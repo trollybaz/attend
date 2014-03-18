@@ -16,7 +16,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
     invitation_token = params[:user][:invitation_token]
     
     # current_user should be nil; shouldn't authenticate
-    byebug
     return if current_user
 
     # TODO: Add require_no_authentication for complete_invitation_update
@@ -43,7 +42,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     # then build a new workspace to go along with it
     super 
     if action_name == 'create'
-      self.resource.workspaces.build
+      self.resource.build_workspace_for_user
     end
     self.resource
   end
