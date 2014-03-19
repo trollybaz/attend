@@ -1,4 +1,4 @@
-class Admin::EventTypesController < ApplicationController
+class Admin::EventTypesController < Admin::ApplicationController
   before_action :set_event_type, only: [:show, :edit, :update, :destroy]
 
   PERSON_PARAM_FIELDS = ['first_name', 'middle_name', 'last_name', 'email']
@@ -20,7 +20,7 @@ class Admin::EventTypesController < ApplicationController
 
     if @event_type.save
       add_event_type_enrollees
-      redirect_to admin_workspace_event_type_url(current_workspace, @event_type), notice: 'Event Type created'  
+      redirect_to admin_workspace_event_type_url(current_workspace, @event_type), notice: 'Event Type created'
     else
       render action: :new
     end
@@ -37,7 +37,7 @@ class Admin::EventTypesController < ApplicationController
     @event_type.assign_attributes(person_params)
     if @event_type.save
       add_event_type_enrollees
-      redirect_to admin_workspace_event_type_url(current_workspace, @event_type), notice: 'Event Type updated'  
+      redirect_to admin_workspace_event_type_url(current_workspace, @event_type), notice: 'Event Type updated'
     else
       render action: :edit
     end
@@ -47,7 +47,7 @@ class Admin::EventTypesController < ApplicationController
     if @event_type.destroy
       redirect_to admin_workspace_event_types_url(current_workspace), notice: 'Person was successfully destroyed.'
     else
-      redirect_to admin_workspace_event_types_url(current_workspace), alert: "Could not delete #{@event_type.name}" 
+      redirect_to admin_workspace_event_types_url(current_workspace), alert: "Could not delete #{@event_type.name}"
     end
   end
 
@@ -76,7 +76,7 @@ class Admin::EventTypesController < ApplicationController
         added_count += 1 if person.save
       end
     end
-     
+
     # TODO: add newly created participants from textarea
 
     # add existing people to roster
@@ -89,6 +89,6 @@ class Admin::EventTypesController < ApplicationController
     end
 
   end
-  
+
 end
 

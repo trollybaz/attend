@@ -1,4 +1,4 @@
-class Admin::WorkspacesController < ApplicationController
+class Admin::WorkspacesController < Admin::ApplicationController
   before_action :set_workspace, only: [:show]
 
   def index
@@ -7,13 +7,13 @@ class Admin::WorkspacesController < ApplicationController
 
   def show
   end
- 
+
  private
 
   # Use callbacks to share common setup or constraints between actions.
   def set_workspace
     # TODO: Requires security check
     @workspace = Workspace.find(params[:id])
-  end  
+  end
 
 end

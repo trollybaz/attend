@@ -1,5 +1,7 @@
 class Api::WorkspacesController < Api::ApplicationController
   before_action :set_workspace,        except: [:index, :create]
+  before_filter :check_workspace,      except: [:index, :create]
+  # pundit verifications
   after_action  :verify_authorized,    only: [:create, :destroy]
   after_filter  :verify_policy_scoped, only: :index
 
@@ -23,7 +25,7 @@ class Api::WorkspacesController < Api::ApplicationController
       return render json: @workspace.errors, status: :unprocessable_entity
     end
   end
- 
+
   def show
     # current_workspace is already "authorized" by default
     render json: Workspaces::ExtendedSerializer.new(@workspace)
@@ -31,8 +33,8 @@ class Api::WorkspacesController < Api::ApplicationController
 
   def update
     # current_workspace is already "authorized" by default
-    params.require(:workspace).permit(:name)
-    @workspace.assign_attributes(params)
+    workspace_params = params.require(:workspace).permit(:name)
+    @workspace.assign_attributes(workspace_params)
     if @workspace.save
       return render json: Workspaces::ExtendedSerializer.new(@workspace)
     else
@@ -47,11 +49,15 @@ class Api::WorkspacesController < Api::ApplicationController
     authorize @workspace
     render head: :unprocessable_entity # disable for now
   end
- 
+
  private
 
   # Use callbacks to share common setup or constraints between actions.
   def set_workspace
     @workspace = current_workspace
-  end  
+  end
+
+  def check_workspace
+    head :not_found if !@workspace
+  end
 end
